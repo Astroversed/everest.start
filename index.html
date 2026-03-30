@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everest ― Start Climbing</title>
+    <link rel="shortcut icon" type="x-icon" href="icons/Logo - Everest.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="left-panel">
+        <img src="Banner.jpg" alt="Everest banner">
+        <div class="left-overlay"></div>
+        <div class="left-copy">
+            <div class="left-brand">
+                <img src="icons/Logo - Everest.png" alt="Everest logo">
+                <span>Everest</span>
+            </div>
+            <h1>Start your climb and grow your English step by step</h1>
+            <p>Everest is built to help each student keep climbing with confidence, practice with purpose, and turn every small step into real progress in English.</p>
+            <div class="feature-points">
+                <div class="feature-pill">Unique climber name</div>
+                <div class="feature-pill">Emoji + profile color</div>
+                <div class="feature-pill">Course selection</div>
+                <div class="feature-pill">1-hour learning access</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div class="top-bar">
+            <div class="brand">
+                <img src="icons/Logo - Everest.png" alt="Everest logo">
+                <span>Everest</span>
+            </div>
+            <div class="top-bar-badge">English Climb Access</div>
+        </div>
+
+        <main class="register-shell">
+            <section class="register-card">
+                <div class="register-heading">
+                    <span class="eyebrow">Everest entry point</span>
+                    <h2>Create your access and begin the climb</h2>
+                    <p>Set your temporary Everest identity, enter quickly, and keep your English climb moving.</p>
+                </div>
+
+                <form id="registerForm" novalidate>
+                    <div class="form-section" id="stepNameSection">
+                        <div class="section-title-row">
+                            <span class="section-step">1</span>
+                            <div>
+                                <h3>Choose your climber name</h3>
+                                <p>Pick the name Everest will use during this temporary session.</p>
+                            </div>
+                        </div>
+
+                        <label class="field">
+                            <span class="field-label">Everest name</span>
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                maxlength="24"
+                                placeholder="Example: Gabriel_Climbs"
+                                autocomplete="off"
+                            >
+                        </label>
+                        <p class="field-hint">Use a clear name with letters, numbers, spaces, hyphens or underscores so your climb is easy to recognize.</p>
+                    </div>
+
+                    <div class="form-section" id="stepProfileSection">
+                        <div class="section-title-row">
+                            <span class="section-step">2</span>
+                            <div>
+                                <h3>Build your climbing identity</h3>
+                                <p>Choose the color and emoji that will represent you while you climb, or keep the defaults and continue.</p>
+                            </div>
+                        </div>
+
+                        <div class="section-inline-note">
+                            <strong>Quick path</strong>
+                            <span>Your preview updates instantly, so you can personalize fast and move on when it already feels right.</span>
+                        </div>
+
+                        <div class="customization-grid">
+                            <div class="picker-block">
+                                <span class="field-label">Profile color</span>
+                                <button type="button" class="picker-toggle" id="colorPickerToggle" aria-expanded="false" aria-controls="colorPickerBody">
+                                    <span class="picker-toggle-copy">
+                                        <strong>Open color vault</strong>
+                                        <span>Reveal tones, palettes and your custom forge</span>
+                                    </span>
+                                    <span class="picker-toggle-icon" aria-hidden="true"></span>
+                                </button>
+                                <div class="picker-collapsible" id="colorPickerBody">
+                                <div class="color-options" id="colorOptions" role="radiogroup" aria-label="Profile color">
+                                    <button type="button" class="color-swatch selected" data-color="#667eea" style="--swatch-color:#667eea" aria-label="Blue"></button>
+                                    <button type="button" class="color-swatch" data-color="#44a08d" style="--swatch-color:#44a08d" aria-label="Teal"></button>
+                                    <button type="button" class="color-swatch" data-color="#ff8a65" style="--swatch-color:#ff8a65" aria-label="Orange"></button>
+                                    <button type="button" class="color-swatch" data-color="#f06292" style="--swatch-color:#f06292" aria-label="Pink"></button>
+                                    <button type="button" class="color-swatch" data-color="#9575cd" style="--swatch-color:#9575cd" aria-label="Purple"></button>
+                                    <button type="button" class="color-swatch" data-color="#81c784" style="--swatch-color:#81c784" aria-label="Green"></button>
+                                    <button type="button" class="color-swatch" data-color="#ffca28" style="--swatch-color:#ffca28" aria-label="Yellow"></button>
+                                    <button type="button" class="color-swatch" data-color="#90a4ae" style="--swatch-color:#90a4ae" aria-label="Gray"></button>
+                                    <button type="button" class="color-swatch" data-color="#ef5350" style="--swatch-color:#ef5350" aria-label="Red"></button>
+                                    <button type="button" class="color-swatch" data-color="#26c6da" style="--swatch-color:#26c6da" aria-label="Cyan"></button>
+                                    <button type="button" class="color-swatch" data-color="#ab47bc" style="--swatch-color:#ab47bc" aria-label="Violet"></button>
+                                    <button type="button" class="color-swatch" data-color="#5c6bc0" style="--swatch-color:#5c6bc0" aria-label="Indigo"></button>
+                                    <button type="button" class="color-swatch" data-color="#29b6f6" style="--swatch-color:#29b6f6" aria-label="Sky blue"></button>
+                                    <button type="button" class="color-swatch" data-color="#66bb6a" style="--swatch-color:#66bb6a" aria-label="Emerald"></button>
+                                    <button type="button" class="color-swatch" data-color="#9ccc65" style="--swatch-color:#9ccc65" aria-label="Lime"></button>
+                                    <button type="button" class="color-swatch" data-color="#d4e157" style="--swatch-color:#d4e157" aria-label="Lemon"></button>
+                                    <button type="button" class="color-swatch" data-color="#ffa726" style="--swatch-color:#ffa726" aria-label="Amber"></button>
+                                    <button type="button" class="color-swatch" data-color="#8d6e63" style="--swatch-color:#8d6e63" aria-label="Brown"></button>
+                                    <button type="button" class="color-swatch" data-color="#78909c" style="--swatch-color:#78909c" aria-label="Blue gray"></button>
+                                    <button type="button" class="color-swatch" data-color="#ec407a" style="--swatch-color:#ec407a" aria-label="Rose"></button>
+                                    <button type="button" class="color-swatch" data-color="#7e57c2" style="--swatch-color:#7e57c2" aria-label="Deep purple"></button>
+                                    <button type="button" class="color-swatch" data-color="#42a5f5" style="--swatch-color:#42a5f5" aria-label="Ocean blue"></button>
+                                    <button type="button" class="color-swatch" data-color="#26a69a" style="--swatch-color:#26a69a" aria-label="Mint"></button>
+                                    <button type="button" class="color-swatch" data-color="#ff7043" style="--swatch-color:#ff7043" aria-label="Coral"></button>
+                                    <button type="button" class="color-swatch" data-color="#e53935" style="--swatch-color:#e53935" aria-label="Crimson"></button>
+                                    <button type="button" class="color-swatch" data-color="#d81b60" style="--swatch-color:#d81b60" aria-label="Magenta"></button>
+                                    <button type="button" class="color-swatch" data-color="#8e24aa" style="--swatch-color:#8e24aa" aria-label="Royal purple"></button>
+                                    <button type="button" class="color-swatch" data-color="#3949ab" style="--swatch-color:#3949ab" aria-label="Royal blue"></button>
+                                    <button type="button" class="color-swatch" data-color="#1e88e5" style="--swatch-color:#1e88e5" aria-label="Azure"></button>
+                                    <button type="button" class="color-swatch" data-color="#039be5" style="--swatch-color:#039be5" aria-label="Bright sky"></button>
+                                    <button type="button" class="color-swatch" data-color="#00acc1" style="--swatch-color:#00acc1" aria-label="Turquoise"></button>
+                                    <button type="button" class="color-swatch" data-color="#00897b" style="--swatch-color:#00897b" aria-label="Jade"></button>
+                                    <button type="button" class="color-swatch" data-color="#43a047" style="--swatch-color:#43a047" aria-label="Leaf green"></button>
+                                    <button type="button" class="color-swatch" data-color="#7cb342" style="--swatch-color:#7cb342" aria-label="Apple green"></button>
+                                    <button type="button" class="color-swatch" data-color="#c0ca33" style="--swatch-color:#c0ca33" aria-label="Olive yellow"></button>
+                                    <button type="button" class="color-swatch" data-color="#fdd835" style="--swatch-color:#fdd835" aria-label="Sun yellow"></button>
+                                    <button type="button" class="color-swatch" data-color="#ffb300" style="--swatch-color:#ffb300" aria-label="Golden amber"></button>
+                                    <button type="button" class="color-swatch" data-color="#fb8c00" style="--swatch-color:#fb8c00" aria-label="Pumpkin"></button>
+                                    <button type="button" class="color-swatch" data-color="#f4511e" style="--swatch-color:#f4511e" aria-label="Burnt orange"></button>
+                                    <button type="button" class="color-swatch" data-color="#6d4c41" style="--swatch-color:#6d4c41" aria-label="Coffee brown"></button>
+                                    <button type="button" class="color-swatch" data-color="#757575" style="--swatch-color:#757575" aria-label="Stone gray"></button>
+                                    <button type="button" class="color-swatch" data-color="#546e7a" style="--swatch-color:#546e7a" aria-label="Steel blue"></button>
+                                    <button type="button" class="color-swatch" data-color="#ad1457" style="--swatch-color:#ad1457" aria-label="Berry"></button>
+                                    <button type="button" class="color-swatch" data-color="#5e35b1" style="--swatch-color:#5e35b1" aria-label="Electric violet"></button>
+                                    <button type="button" class="color-swatch" data-color="#1565c0" style="--swatch-color:#1565c0" aria-label="Deep ocean"></button>
+                                    <button type="button" class="color-swatch" data-color="#2e7d32" style="--swatch-color:#2e7d32" aria-label="Forest green"></button>
+                                    <button type="button" class="color-swatch" data-color="#ef6c00" style="--swatch-color:#ef6c00" aria-label="Tangerine"></button>
+                                    <button type="button" class="color-swatch" data-color="#4e342e" style="--swatch-color:#4e342e" aria-label="Chocolate brown"></button>
+                                    <button type="button" class="color-swatch" data-color="#880e4f" style="--swatch-color:#880e4f" aria-label="Dark rose"></button>
+                                    <button type="button" class="color-swatch" data-color="#311b92" style="--swatch-color:#311b92" aria-label="Midnight purple"></button>
+                                    <button type="button" class="color-swatch" data-color="#0d47a1" style="--swatch-color:#0d47a1" aria-label="Navy blue"></button>
+                                    <button type="button" class="color-swatch" data-color="#004d40" style="--swatch-color:#004d40" aria-label="Deep teal"></button>
+                                    <button type="button" class="color-swatch" data-color="#1b5e20" style="--swatch-color:#1b5e20" aria-label="Deep green"></button>
+                                    <button type="button" class="color-swatch" data-color="#e65100" style="--swatch-color:#e65100" aria-label="Molten orange"></button>
+                                    <button type="button" class="color-swatch" data-color="#263238" style="--swatch-color:#263238" aria-label="Charcoal"></button>
+                                    <button type="button" class="color-swatch" data-color="#ff6f91" style="--swatch-color:#ff6f91" aria-label="Bubblegum"></button>
+                                    <button type="button" class="color-swatch" data-color="#6a4c93" style="--swatch-color:#6a4c93" aria-label="Plum"></button>
+                                    <button type="button" class="color-swatch" data-color="#1982c4" style="--swatch-color:#1982c4" aria-label="Cerulean"></button>
+                                    <button type="button" class="color-swatch" data-color="#00b4d8" style="--swatch-color:#00b4d8" aria-label="Aqua"></button>
+                                    <button type="button" class="color-swatch" data-color="#06d6a0" style="--swatch-color:#06d6a0" aria-label="Fresh mint"></button>
+                                    <button type="button" class="color-swatch" data-color="#8ac926" style="--swatch-color:#8ac926" aria-label="Spring green"></button>
+                                    <button type="button" class="color-swatch" data-color="#ffbe0b" style="--swatch-color:#ffbe0b" aria-label="Canary"></button>
+                                    <button type="button" class="color-swatch" data-color="#ff7f51" style="--swatch-color:#ff7f51" aria-label="Salmon"></button>
+                                    <button type="button" class="color-swatch" data-color="#a47148" style="--swatch-color:#a47148" aria-label="Wood brown"></button>
+
+                                    <button
+                                        type="button"
+                                        class="color-swatch custom-color-trigger"
+                                        id="customColorTrigger"
+                                        data-color=""
+                                        aria-expanded="false"
+                                        aria-label="Choose custom color"
+                                        title="Choose custom color"
+                                    >
+                                        <span class="custom-color-plus">+</span>
+                                    </button>
+                                </div>
+                                </div>
+
+                                <div class="custom-color-panel" id="customColorPanel" hidden>
+                                    <div class="custom-color-header">
+                                        <strong>Custom color</strong>
+                                        <span>Shape your Everest identity</span>
+                                        <div class="custom-color-drag-indicator" aria-hidden="true" title="Drag panel">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-color-preview-row">
+                                        <div class="custom-color-preview" id="customColorPreview"></div>
+                                        <div class="custom-color-values">
+                                            <span class="custom-color-label">Selected tone</span>
+                                            <strong id="customColorHex">#667eea</strong>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-color-bar-wrap">
+                                        <span class="custom-color-label">Preview bar</span>
+                                        <div class="custom-color-bar" id="customColorBar"></div>
+                                    </div>
+
+                                    <label class="custom-color-field">
+                                        <span>Hex color</span>
+                                        <input type="text" id="customColorText" value="#667eea" maxlength="7" placeholder="#667eea">
+                                    </label>
+
+                                    <button type="button" class="custom-studio-trigger" id="customStudioTrigger" aria-expanded="false">
+                                        <span class="custom-studio-trigger-copy">
+                                            <strong>Open Color Studio</strong>
+                                            <span>RGB, HSL and deeper color shaping</span>
+                                        </span>
+                                        <span class="custom-studio-trigger-icon" aria-hidden="true"></span>
+                                    </button>
+
+                                    <div class="custom-color-actions">
+                                        <button type="button" class="custom-color-btn secondary" id="customColorClose">Close</button>
+                                        <button type="button" class="custom-color-btn primary" id="customColorApply">Use this color</button>
+                                    </div>
+                                </div>
+
+                                <div class="custom-color-studio" id="customColorStudio" hidden>
+                                    <div class="custom-studio-heading">
+                                        <strong>Everest Color Studio</strong>
+                                        <span>Refine your identity with precision controls</span>
+                                        <div class="custom-color-drag-indicator custom-studio-drag-indicator" aria-hidden="true" title="Drag studio">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-picker-shell">
+                                        <div class="custom-picker-surface" id="customColorSurface" aria-label="Color surface">
+                                            <div class="custom-picker-surface-white"></div>
+                                            <div class="custom-picker-surface-black"></div>
+                                            <button type="button" class="custom-picker-handle" id="customColorSurfaceHandle" aria-label="Adjust saturation and lightness"></button>
+                                        </div>
+
+                                        <div class="custom-hue-wrap">
+                                            <span class="custom-color-label">Hue</span>
+                                            <div class="custom-hue-track" id="customHueTrack" aria-label="Hue">
+                                                <button type="button" class="custom-hue-handle" id="customHueHandle" aria-label="Adjust hue"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-studio-tabs" role="tablist" aria-label="Color method">
+                                        <button type="button" class="custom-studio-tab active" id="customTabRgb" data-mode="rgb" aria-selected="true">RGB</button>
+                                        <button type="button" class="custom-studio-tab" id="customTabHsl" data-mode="hsl" aria-selected="false">HSL</button>
+                                        <button type="button" class="custom-studio-tab custom-studio-tab-mobile" id="customTabHex" data-mode="hex" aria-selected="false">HEX</button>
+                                    </div>
+
+                                    <div class="custom-studio-panels">
+                                        <div class="custom-studio-mode active" id="customModeRgb" data-mode-panel="rgb">
+                                            <div class="custom-rgb-grid">
+                                                <label class="custom-color-field compact">
+                                                    <span>R</span>
+                                                    <input type="text" id="customColorR" value="102" maxlength="3" inputmode="numeric" placeholder="255">
+                                                </label>
+                                                <label class="custom-color-field compact">
+                                                    <span>G</span>
+                                                    <input type="text" id="customColorG" value="126" maxlength="3" inputmode="numeric" placeholder="255">
+                                                </label>
+                                                <label class="custom-color-field compact">
+                                                    <span>B</span>
+                                                    <input type="text" id="customColorB" value="234" maxlength="3" inputmode="numeric" placeholder="255">
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="custom-studio-mode" id="customModeHsl" data-mode-panel="hsl" hidden>
+                                            <div class="custom-rgb-grid">
+                                                <label class="custom-color-field compact">
+                                                    <span>H</span>
+                                                    <input type="text" id="customColorH" value="229" maxlength="3" inputmode="numeric" placeholder="360">
+                                                </label>
+                                                <label class="custom-color-field compact">
+                                                    <span>S</span>
+                                                    <input type="text" id="customColorS" value="75" maxlength="3" inputmode="numeric" placeholder="100">
+                                                </label>
+                                                <label class="custom-color-field compact">
+                                                    <span>L</span>
+                                                    <input type="text" id="customColorL" value="66" maxlength="3" inputmode="numeric" placeholder="100">
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="custom-studio-mode" id="customModeHex" data-mode-panel="hex" hidden>
+                                            <label class="custom-color-field">
+                                                <span>Hex precision</span>
+                                                <input type="text" id="customColorTextStudio" value="#667eea" maxlength="7" placeholder="#667eea">
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-color-actions custom-studio-actions">
+                                        <button type="button" class="custom-color-btn secondary" id="customStudioClose">Close studio</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="picker-block">
+                                <span class="field-label">Profile emoji</span>
+                                <button type="button" class="picker-toggle" id="emojiPickerToggle" aria-expanded="false" aria-controls="emojiPickerBody">
+                                    <span class="picker-toggle-copy">
+                                        <strong>Open emoji kit</strong>
+                                        <span>Unfold faces, symbols and climbing energy</span>
+                                    </span>
+                                    <span class="picker-toggle-icon" aria-hidden="true"></span>
+                                </button>
+                                <div class="picker-collapsible" id="emojiPickerBody">
+                                <div class="emoji-options" id="emojiOptions" role="radiogroup" aria-label="Profile emoji">
+                                    <button type="button" class="emoji-choice selected" data-emoji="🧠">🧠</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🚀">🚀</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🎯">🎯</button>
+                                    <button type="button" class="emoji-choice" data-emoji="📚">📚</button>
+                                    <button type="button" class="emoji-choice" data-emoji="💡">💡</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🎨">🎨</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🧩">🧩</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌟">🌟</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🔥">🔥</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🎓">🎓</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🛠️">🛠️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🏆">🏆</button>
+                                    <button type="button" class="emoji-choice" data-emoji="😎">😎</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🤖">🤖</button>
+                                    <button type="button" class="emoji-choice" data-emoji="👑">👑</button>
+                                    <button type="button" class="emoji-choice" data-emoji="⚡">⚡</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌈">🌈</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🦊">🦊</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🐼">🐼</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🐯">🐯</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🦁">🦁</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🐬">🐬</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🦄">🦄</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🐙">🐙</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🛡️">🛡️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🎮">🎮</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🎵">🎵</button>
+                                    <button type="button" class="emoji-choice" data-emoji="📷">📷</button>
+                                    <button type="button" class="emoji-choice" data-emoji="✏️">✏️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="📖">📖</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🧪">🧪</button>
+                                    <button type="button" class="emoji-choice" data-emoji="💻">💻</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🛰️">🛰️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌍">🌍</button>
+                                    <button type="button" class="emoji-choice" data-emoji="☀️">☀️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌙">🌙</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🍀">🍀</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌸">🌸</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🍎">🍎</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🍕">🍕</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🏀">🏀</button>
+                                    <button type="button" class="emoji-choice" data-emoji="⚽">⚽</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🏐">🏐</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🚲">🚲</button>
+                                    <button type="button" class="emoji-choice" data-emoji="😄">😄</button>
+                                    <button type="button" class="emoji-choice" data-emoji="😁">😁</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🥳">🥳</button>
+                                    <button type="button" class="emoji-choice" data-emoji="😇">😇</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🤩">🤩</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🧐">🧐</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🤓">🤓</button>
+                                    <button type="button" class="emoji-choice" data-emoji="😺">😺</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🐶">🐶</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🐸">🐸</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🐵">🐵</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🦋">🦋</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🐢">🐢</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🦕">🦕</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🦖">🦖</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🐧">🐧</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🐝">🐝</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌋">🌋</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌊">🌊</button>
+                                    <button type="button" class="emoji-choice" data-emoji="⛰️">⛰️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌴">🌴</button>
+                                    <button type="button" class="emoji-choice" data-emoji="❄️">❄️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="☁️">☁️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="⚙️">⚙️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🔧">🔧</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🧰">🧰</button>
+                                    <button type="button" class="emoji-choice" data-emoji="📌">📌</button>
+                                    <button type="button" class="emoji-choice" data-emoji="📎">📎</button>
+                                    <button type="button" class="emoji-choice" data-emoji="📍">📍</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🗂️">🗂️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="📦">📦</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🧭">🧭</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🔬">🔬</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🧬">🧬</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🩺">🩺</button>
+                                    <button type="button" class="emoji-choice" data-emoji="📐">📐</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🖍️">🖍️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🖌️">🖌️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🎬">🎬</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🎧">🎧</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🎹">🎹</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🎸">🎸</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🥁">🥁</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🏓">🏓</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🏸">🏸</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🥇">🥇</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🚗">🚗</button>
+                                    <button type="button" class="emoji-choice" data-emoji="✈️">✈️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🚀">🚀</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🛸">🛸</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🏰">🏰</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🗼">🗼</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🎡">🎡</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🍔">🍔</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🍟">🍟</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🍩">🍩</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🧁">🧁</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🍉">🍉</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🍓">🍓</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌵">🌵</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌺">🌺</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌻">🌻</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🌼">🌼</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🪐">🪐</button>
+                                    <button type="button" class="emoji-choice" data-emoji="⭐">⭐</button>
+                                    <button type="button" class="emoji-choice" data-emoji="☄️">☄️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🫶">🫶</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🙌">🙌</button>
+                                    <button type="button" class="emoji-choice" data-emoji="👏">👏</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🤝">🤝</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🫡">🫡</button>
+                                    <button type="button" class="emoji-choice" data-emoji="💎">💎</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🔮">🔮</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🕹️">🕹️</button>
+                                    <button type="button" class="emoji-choice" data-emoji="🪄">🪄</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preview-card">
+                            <div class="preview-avatar" id="profilePreviewAvatar" aria-hidden="true">
+                                <span id="profilePreviewEmoji">🧠</span>
+                            </div>
+                            <div class="preview-copy">
+                                <div class="preview-meta">
+                                    <span class="preview-label">Everest dashboard preview</span>
+                                </div>
+                                <strong id="profilePreviewName">Your name here</strong>
+                                <span id="profilePreviewCourse">Your course will appear here</span>
+                            </div>
+                            <button type="button" class="randomize-btn" id="randomizeProfileBtn" aria-label="Generate random profile">
+                                <span class="randomize-icon">🎲</span>
+                                <span class="randomize-text">Shuffle identity</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-section" id="stepCourseSection">
+                        <div class="section-title-row">
+                            <span class="section-step">3</span>
+                            <div>
+                                <h3>Select your course path</h3>
+                                <p>Your course places your profile correctly so you can enter without friction.</p>
+                            </div>
+                        </div>
+
+                        <label class="field">
+                            <span class="field-label">Course route</span>
+                            <input type="hidden" id="course" name="course">
+
+                            <div class="course-select" id="courseSelect">
+                                <button type="button" class="course-select-trigger" id="courseTrigger" aria-expanded="false" aria-controls="courseDropdown">
+                                    <span class="course-trigger-label" id="courseTriggerLabel">Choose your course</span>
+                                    <span class="course-trigger-icon" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" class="course-trigger-svg">
+                                            <path d="M7 10l5 5 5-5"></path>
+                                        </svg>
+                                    </span>
+                                </button>
+
+                                <div class="course-dropdown" id="courseDropdown" hidden>
+                                    <div class="course-search-wrap">
+                                        <input
+                                            type="text"
+                                            id="courseSearch"
+                                            class="course-search"
+                                            placeholder="Search your course..."
+                                            autocomplete="off"
+                                        >
+                                    </div>
+
+                                    <div class="course-options" id="courseOptions" role="listbox" aria-label="Course list">
+                                        <button type="button" class="course-option" data-value="Third A" data-search="Third A Tercero A">
+                                            <span class="course-option-main">Third A</span>
+                                            <span class="course-option-alt">Tercero A</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="Third B" data-search="Third B Tercero B">
+                                            <span class="course-option-main">Third B</span>
+                                            <span class="course-option-alt">Tercero B</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="Third C" data-search="Third C Tercero C">
+                                            <span class="course-option-main">Third C</span>
+                                            <span class="course-option-alt">Tercero C</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="Third D" data-search="Third D Tercero D">
+                                            <span class="course-option-main">Third D</span>
+                                            <span class="course-option-alt">Tercero D</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="Third E" data-search="Third E Tercero E">
+                                            <span class="course-option-main">Third E</span>
+                                            <span class="course-option-alt">Tercero E</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="4th Computer Science A" data-search="4th Computer Science A 4to Informatica A">
+                                            <span class="course-option-main">4th Computer Science A</span>
+                                            <span class="course-option-alt">4to Informática A</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="4th Computer Science B" data-search="4th Computer Science B 4to Informatica B">
+                                            <span class="course-option-main">4th Computer Science B</span>
+                                            <span class="course-option-alt">4to Informática B</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="4th Nursing" data-search="4th Nursing 4to Enfermeria">
+                                            <span class="course-option-main">4th Nursing</span>
+                                            <span class="course-option-alt">4to Enfermería</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="4th Management" data-search="4th Management 4to Gestion">
+                                            <span class="course-option-main">4th Management</span>
+                                            <span class="course-option-alt">4to Gestión</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="4th Marketing" data-search="4th Marketing 4to Mercadeo">
+                                            <span class="course-option-main">4th Marketing</span>
+                                            <span class="course-option-alt">4to Mercadeo</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="4th Fashion Design" data-search="4th Fashion Design 4to Modas">
+                                            <span class="course-option-main">4th Fashion Design</span>
+                                            <span class="course-option-alt">4to Modas</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="4th Cabinetmaking" data-search="4th Cabinetmaking 4to Ebanisteria">
+                                            <span class="course-option-main">4th Cabinetmaking</span>
+                                            <span class="course-option-alt">4to Ebanistería</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="5th Computer Science" data-search="5th Computer Science 5to Informatica">
+                                            <span class="course-option-main">5th Computer Science</span>
+                                            <span class="course-option-alt">5to Informática</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="5th Nursing" data-search="5th Nursing 5to Enfermeria">
+                                            <span class="course-option-main">5th Nursing</span>
+                                            <span class="course-option-alt">5to Enfermería</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="5th Management" data-search="5th Management 5to Gestion">
+                                            <span class="course-option-main">5th Management</span>
+                                            <span class="course-option-alt">5to Gestión</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="5th Marketing" data-search="5th Marketing 5to Mercadeo">
+                                            <span class="course-option-main">5th Marketing</span>
+                                            <span class="course-option-alt">5to Mercadeo</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="5th Fashion Design" data-search="5th Fashion Design 5to Modas">
+                                            <span class="course-option-main">5th Fashion Design</span>
+                                            <span class="course-option-alt">5to Modas</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="5th Cabinetmaking" data-search="5th Cabinetmaking 5to Ebanisteria">
+                                            <span class="course-option-main">5th Cabinetmaking</span>
+                                            <span class="course-option-alt">5to Ebanistería</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="6th Computer Science" data-search="6th Computer Science 6to Informatica">
+                                            <span class="course-option-main">6th Computer Science</span>
+                                            <span class="course-option-alt">6to Informática</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="6th Nursing" data-search="6th Nursing 6to Enfermeria">
+                                            <span class="course-option-main">6th Nursing</span>
+                                            <span class="course-option-alt">6to Enfermería</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="6th Management" data-search="6th Management 6to Gestion">
+                                            <span class="course-option-main">6th Management</span>
+                                            <span class="course-option-alt">6to Gestión</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="6th Marketing" data-search="6th Marketing 6to Mercadeo">
+                                            <span class="course-option-main">6th Marketing</span>
+                                            <span class="course-option-alt">6to Mercadeo</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="6th Fashion Design" data-search="6th Fashion Design 6to Modas">
+                                            <span class="course-option-main">6th Fashion Design</span>
+                                            <span class="course-option-alt">6to Modas</span>
+                                        </button>
+                                        <button type="button" class="course-option" data-value="6th Cabinetmaking" data-search="6th Cabinetmaking 6to Ebanisteria">
+                                            <span class="course-option-main">6th Cabinetmaking</span>
+                                            <span class="course-option-alt">6to Ebanistería</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="register-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">Climb duration</span>
+                            <strong>1-hour access</strong>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Profile storage</span>
+                            <strong>Saved locally</strong>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Purpose</span>
+                            <strong>Enter and keep climbing</strong>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">Enter Everest</button>
+                    </div>
+                </form>
+
+                <div class="feedback-message" id="feedbackMessage" aria-live="polite"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
