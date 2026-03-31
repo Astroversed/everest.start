@@ -2,6 +2,16 @@ const EVEREST_ACTIVE_USER_KEY = 'everest_active_user';
 const EVEREST_USERS_KEY = 'everest_temp_users';
 const EVEREST_SESSION_MS = 60 * 60 * 1000;
 const DASHBOARD_FALLBACK_URL = 'https://astroversed.github.io/everest.dashboard/';
+const FIRESTORE_LEADERBOARD_COLLECTION = 'leaderboard';
+const FIREBASE_CONFIG = {
+    apiKey: 'AIzaSyCVb6UZ48mcD8tAW67LMMVPi2SMNiemcUY',
+    authDomain: 'everest-dashboard-e58a5.firebaseapp.com',
+    projectId: 'everest-dashboard-e58a5',
+    storageBucket: 'everest-dashboard-e58a5.firebasestorage.app',
+    messagingSenderId: '36464478604',
+    appId: '1:36464478604:web:b8dfacd61af6c80aa3eea9',
+    measurementId: 'G-EBP09MWQRD'
+};
 
 const courseSelect = document.getElementById('course');
 const courseSelectShell = document.getElementById('courseSelect');
@@ -72,6 +82,7 @@ let customColorStudioDragState = null;
 let customColorSyncFrame = null;
 let mobilePanelReturnTimer = null;
 let compactIdentityMobileMode = null;
+let sharedRegistry = null;
 
 function readJsonStorage(key, fallback) {
     try {
@@ -88,6 +99,62 @@ function writeJsonStorage(key, value) {
         localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
         console.error(`Failed to write storage key: ${key}`, error);
+    }
+}
+
+function setupSharedRegistry() {
+    if (sharedRegistry) return sharedRegistry;
+    if (!window.firebase || typeof window.firebase.initializeApp !== 'function' || typeof window.firebase.firestore !== 'function') {
+        return null;
+    }
+
+    try {
+        if (!window.firebase.apps.length) {
+            window.firebase.initializeApp(FIREBASE_CONFIG);
+        }
+        sharedRegistry = window.firebase.firestore().collection(FIRESTORE_LEADERBOARD_COLLECTION);
+    } catch (error) {
+        console.error('Failed to initialize shared Everest registry', error);
+        sharedRegistry = null;
+    }
+
+    return sharedRegistry;
+}
+
+async function getSharedUserRecord(username) {
+    const normalized = normalizeUsername(username);
+    const registry = setupSharedRegistry();
+    if (!registry || !normalized) return null;
+
+    try {
+        const snapshot = await registry.doc(normalized).get();
+        if (!snapshot.exists) return null;
+        return snapshot.data() || null;
+    } catch (error) {
+        console.error('Failed to read shared Everest registry', error);
+        return null;
+    }
+}
+
+async function deleteSharedUserRecordById(userId) {
+    const registry = setupSharedRegistry();
+    if (!registry || !userId) return;
+
+    try {
+        await registry.doc(userId).delete();
+    } catch (error) {
+        console.error('Failed to delete shared Everest user', error);
+    }
+}
+
+function removeStaleLocalUsername(normalizedUsername) {
+    if (!normalizedUsername) return;
+    const users = pruneExpiredUsers().filter((user) => normalizeUsername(user.username) !== normalizedUsername);
+    writeJsonStorage(EVEREST_USERS_KEY, users);
+
+    const activeUser = readJsonStorage(EVEREST_ACTIVE_USER_KEY, null);
+    if (activeUser && normalizeUsername(activeUser.username) === normalizedUsername) {
+        localStorage.removeItem(EVEREST_ACTIVE_USER_KEY);
     }
 }
 
@@ -292,21 +359,37 @@ function hslToRgb(h, s, l) {
 function pruneExpiredUsers() {
     const now = Date.now();
     const storedUsers = readJsonStorage(EVEREST_USERS_KEY, []);
+    const expiredUsers = storedUsers.filter((user) => user && typeof user.expiresAt === 'number' && user.expiresAt <= now);
     const activeUsers = storedUsers.filter((user) => user && typeof user.expiresAt === 'number' && user.expiresAt > now);
     writeJsonStorage(EVEREST_USERS_KEY, activeUsers);
+    expiredUsers.forEach((user) => {
+        void deleteSharedUserRecordById(normalizeUsername(user.username));
+    });
 
     const activeUser = readJsonStorage(EVEREST_ACTIVE_USER_KEY, null);
     if (activeUser && typeof activeUser.expiresAt === 'number' && activeUser.expiresAt <= now) {
+        void deleteSharedUserRecordById(normalizeUsername(activeUser.username));
         localStorage.removeItem(EVEREST_ACTIVE_USER_KEY);
     }
 
     return activeUsers;
 }
 
-function isUsernameTaken(username) {
+async function isUsernameTaken(username) {
     const normalized = normalizeUsername(username);
     const users = pruneExpiredUsers();
-    return users.some((user) => normalizeUsername(user.username) === normalized);
+    const localTaken = users.some((user) => normalizeUsername(user.username) === normalized);
+    const remoteUser = await getSharedUserRecord(username);
+
+    if (remoteUser && typeof remoteUser.expiresAt === 'number' && remoteUser.expiresAt > Date.now()) {
+        return true;
+    }
+
+    if (localTaken) {
+        removeStaleLocalUsername(normalized);
+    }
+
+    return false;
 }
 
 function setFeedback(message, type) {
@@ -1321,7 +1404,7 @@ function persistUserProfile(profile) {
     writeJsonStorage(EVEREST_ACTIVE_USER_KEY, profile);
 }
 
-function validateForm() {
+async function validateForm() {
     const username = formatUsernameDisplay(sanitizeUsername(usernameInput.value));
     const course = courseSelect.value;
 
@@ -1346,7 +1429,7 @@ function validateForm() {
         };
     }
 
-    if (isUsernameTaken(username)) {
+    if (await isUsernameTaken(username)) {
         return {
             message: 'That Everest name is already active right now. Choose another one and keep climbing.',
             section: stepNameSection
@@ -1368,7 +1451,7 @@ function getDashboardTarget() {
     return params.get('redirect') || DASHBOARD_FALLBACK_URL;
 }
 
-function submitRegistration(event) {
+async function submitRegistration(event) {
     event.preventDefault();
     if (!registerForm) return;
 
@@ -1376,7 +1459,7 @@ function submitRegistration(event) {
     usernameInput.value = cleaned;
     clearStepErrors();
 
-    const validationError = validateForm();
+    const validationError = await validateForm();
     if (validationError) {
         showStepError(validationError.section);
         setFeedback(validationError.message, 'error');
