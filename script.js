@@ -918,7 +918,7 @@ function setupCustomColorPicker() {
         customStudioTrigger.addEventListener('click', (event) => {
             event.preventDefault();
             event.stopPropagation();
-            openCustomColorStudio();
+            toggleCustomColorStudio();
         });
     }
 
