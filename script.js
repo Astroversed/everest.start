@@ -214,6 +214,16 @@ function lockCustomColorOutsideClose(duration = 220) {
     customColorOutsideCloseLockUntil = Date.now() + duration;
 }
 
+function ensureDesktopCustomColorPortals() {
+    if (!isDesktopCustomColorUI()) return;
+    if (customColorPanel && customColorPanel.parentElement !== document.body) {
+        document.body.appendChild(customColorPanel);
+    }
+    if (customColorStudio && customColorStudio.parentElement !== document.body) {
+        document.body.appendChild(customColorStudio);
+    }
+}
+
 function scheduleCustomColorSync(colorValue) {
     const normalized = normalizeHexColor(colorValue);
     if (!normalized) return;
@@ -573,6 +583,7 @@ function closeCustomColorPanel() {
 
 function openCustomColorPanel() {
     if (!customColorPanel) return;
+    ensureDesktopCustomColorPortals();
 
     if (customColorCloseTimer) {
         window.clearTimeout(customColorCloseTimer);
@@ -619,6 +630,7 @@ function activateCustomColorTrigger(event) {
 
 function openCustomColorStudio() {
     if (!customColorStudio || !customStudioTrigger) return;
+    ensureDesktopCustomColorPortals();
     if (isDesktopCustomColorUI() && !isCustomColorPanelOpen) {
         openCustomColorPanel();
     }
@@ -887,6 +899,7 @@ function setupCustomColorPicker() {
     }
     customColorStudioOpen = false;
     syncCustomColorUI(selectedColor);
+    ensureDesktopCustomColorPortals();
 
     customColorTrigger.addEventListener('pointerdown', (event) => {
         event.stopPropagation();
@@ -1119,6 +1132,7 @@ function setupCustomColorPicker() {
     });
 
     window.addEventListener('resize', () => {
+        ensureDesktopCustomColorPortals();
         if (isCustomColorPanelOpen && customColorStudioOpen) {
             positionCustomColorStudio();
         }
