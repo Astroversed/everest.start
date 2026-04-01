@@ -1107,6 +1107,9 @@ function setupCustomColorPicker() {
     }
 
     document.addEventListener('pointerdown', (event) => {
+        if (!isDesktopCustomColorUI()) {
+            return;
+        }
         if (Date.now() < customColorOutsideCloseLockUntil || customColorDragState || customColorStudioDragState) {
             return;
         }
@@ -1153,8 +1156,8 @@ function setupCustomColorDrag() {
     if (!customColorPanel || !customColorHeader) return;
 
     customColorHeader.addEventListener('pointerdown', (event) => {
-        if (!isDesktopCustomColorUI()) return;
-        if (event.button !== 0) return;
+        if (event.target instanceof Element && event.target.closest('button, input, textarea, select, a')) return;
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
         event.preventDefault();
         event.stopPropagation();
         lockCustomColorOutsideClose(360);
@@ -1208,8 +1211,8 @@ function setupCustomColorStudioDrag() {
     if (!customColorStudio || !customStudioDragIndicator) return;
 
     customStudioDragIndicator.addEventListener('pointerdown', (event) => {
-        if (!isDesktopCustomColorUI()) return;
-        if (event.button !== 0) return;
+        if (event.target instanceof Element && event.target.closest('button, input, textarea, select, a')) return;
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
         event.preventDefault();
         event.stopPropagation();
         lockCustomColorOutsideClose(360);
