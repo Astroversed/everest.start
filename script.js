@@ -82,6 +82,7 @@ let customColorStudioDragState = null;
 let customColorSyncFrame = null;
 let mobilePanelReturnTimer = null;
 let compactIdentityMobileMode = null;
+let customColorOutsideCloseLockUntil = 0;
 let sharedRegistry = null;
 
 function readJsonStorage(key, fallback) {
@@ -203,6 +204,14 @@ function clamp(value, min, max) {
 
 function isCompactMobile() {
     return window.innerWidth <= 560;
+}
+
+function isDesktopCustomColorUI() {
+    return window.innerWidth > 780;
+}
+
+function lockCustomColorOutsideClose(duration = 220) {
+    customColorOutsideCloseLockUntil = Date.now() + duration;
 }
 
 function scheduleCustomColorSync(colorValue) {
@@ -574,9 +583,9 @@ function openCustomColorPanel() {
     const panelWidth = Math.min(340, window.innerWidth - 24);
     const preferredLeft = triggerRect ? triggerRect.left + (triggerRect.width / 2) - (panelWidth / 2) : (window.innerWidth - panelWidth) / 2;
     const safeLeft = Math.min(Math.max(12, preferredLeft), Math.max(12, window.innerWidth - panelWidth - 12));
-
+    const safeTop = Math.max(16, triggerRect ? triggerRect.bottom + 16 : 160);
     customColorPanel.style.left = `${safeLeft}px`;
-    customColorPanel.style.top = `${Math.max(16, triggerRect ? triggerRect.bottom + 16 : 160)}px`;
+    customColorPanel.style.top = `${safeTop}px`;
     customColorPanel.style.transform = 'none';
     customColorPanel.classList.remove('closing', 'dragging');
     customColorPanel.hidden = false;
@@ -585,6 +594,7 @@ function openCustomColorPanel() {
         customColorTrigger.setAttribute('aria-expanded', 'true');
     }
     isCustomColorPanelOpen = true;
+    lockCustomColorOutsideClose(isDesktopCustomColorUI() ? 320 : 160);
 }
 
 function toggleCustomColorPanel() {
@@ -609,6 +619,9 @@ function activateCustomColorTrigger(event) {
 
 function openCustomColorStudio() {
     if (!customColorStudio || !customStudioTrigger) return;
+    if (isDesktopCustomColorUI() && !isCustomColorPanelOpen) {
+        openCustomColorPanel();
+    }
     if (customColorStudioCloseTimer) {
         window.clearTimeout(customColorStudioCloseTimer);
         customColorStudioCloseTimer = null;
@@ -622,6 +635,7 @@ function openCustomColorStudio() {
     customStudioTrigger.setAttribute('aria-expanded', 'true');
     customColorStudioOpen = true;
     positionCustomColorStudio();
+    lockCustomColorOutsideClose(isDesktopCustomColorUI() ? 320 : 160);
 }
 
 function closeCustomColorStudio() {
@@ -1080,6 +1094,9 @@ function setupCustomColorPicker() {
     }
 
     document.addEventListener('pointerdown', (event) => {
+        if (Date.now() < customColorOutsideCloseLockUntil || customColorDragState || customColorStudioDragState) {
+            return;
+        }
         const eventPath = typeof event.composedPath === 'function' ? event.composedPath() : [];
         const clickedInsidePanel = eventPath.includes(customColorPanel);
         const clickedTrigger = eventPath.includes(customColorTrigger);
@@ -1122,9 +1139,11 @@ function setupCustomColorDrag() {
     if (!customColorPanel || !customColorHeader) return;
 
     customColorHeader.addEventListener('pointerdown', (event) => {
+        if (!isDesktopCustomColorUI()) return;
         if (event.button !== 0) return;
         event.preventDefault();
         event.stopPropagation();
+        lockCustomColorOutsideClose(360);
 
         customColorDragState = {
             startX: event.clientX,
@@ -1139,6 +1158,8 @@ function setupCustomColorDrag() {
 
     customColorHeader.addEventListener('pointermove', (event) => {
         if (!customColorDragState) return;
+        event.preventDefault();
+        event.stopPropagation();
 
         const nextLeft = customColorDragState.panelLeft + (event.clientX - customColorDragState.startX);
         const nextTop = customColorDragState.panelTop + (event.clientY - customColorDragState.startY);
@@ -1154,6 +1175,7 @@ function setupCustomColorDrag() {
 
         customColorDragState = null;
         customColorPanel.classList.remove('dragging');
+        lockCustomColorOutsideClose(240);
 
         if (event && typeof event.pointerId === 'number') {
             try {
@@ -1172,8 +1194,11 @@ function setupCustomColorStudioDrag() {
     if (!customColorStudio || !customStudioDragIndicator) return;
 
     customStudioDragIndicator.addEventListener('pointerdown', (event) => {
+        if (!isDesktopCustomColorUI()) return;
         if (event.button !== 0) return;
         event.preventDefault();
+        event.stopPropagation();
+        lockCustomColorOutsideClose(360);
 
         customColorStudioDragState = {
             startX: event.clientX,
@@ -1189,6 +1214,7 @@ function setupCustomColorStudioDrag() {
     customStudioDragIndicator.addEventListener('pointermove', (event) => {
         if (!customColorStudioDragState) return;
         event.preventDefault();
+        event.stopPropagation();
 
         const nextLeft = customColorStudioDragState.panelLeft + (event.clientX - customColorStudioDragState.startX);
         const nextTop = customColorStudioDragState.panelTop + (event.clientY - customColorStudioDragState.startY);
@@ -1204,6 +1230,7 @@ function setupCustomColorStudioDrag() {
 
         customColorStudioDragState = null;
         customColorStudio.classList.remove('dragging');
+        lockCustomColorOutsideClose(240);
 
         if (event && typeof event.pointerId === 'number') {
             try {
