@@ -770,24 +770,40 @@ function renderProjectQrCode() {
             height: 256,
             type: 'canvas',
             data: EVEREST_START_URL,
-            margin: 10,
+            margin: 12,
+            image: 'icons/Logo B - Everest.png',
+            imageOptions: {
+                hideBackgroundDots: true,
+                imageSize: 0.23,
+                margin: 6,
+                crossOrigin: 'anonymous'
+            },
             qrOptions: {
                 errorCorrectionLevel: 'Q'
             },
             dotsOptions: {
-                color: '#4b74f0',
-                type: 'rounded'
+                type: 'rounded',
+                gradient: {
+                    type: 'linear',
+                    rotation: Math.PI / 3,
+                    colorStops: [
+                        { offset: 0, color: '#1c2358' },
+                        { offset: 0.34, color: '#4b74f0' },
+                        { offset: 0.7, color: '#7fd9f7' },
+                        { offset: 1, color: '#d8f6ef' }
+                    ]
+                }
             },
             cornersSquareOptions: {
-                color: '#202862',
+                color: '#1c2358',
                 type: 'extra-rounded'
             },
             cornersDotOptions: {
-                color: '#7fd9f7',
+                color: '#4b74f0',
                 type: 'dot'
             },
             backgroundOptions: {
-                color: '#f7f9ff'
+                color: '#ffffff'
             }
         });
     } else {
