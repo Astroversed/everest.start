@@ -11,6 +11,17 @@
     <div class="left-panel">
         <img src="Banner.jpg" alt="Everest banner">
         <div class="left-overlay"></div>
+        <button
+            type="button"
+            class="project-qr-trigger"
+            id="projectQrTrigger"
+            aria-haspopup="dialog"
+            aria-expanded="false"
+            aria-controls="projectQrModal"
+            title="Open Everest project QR"
+        >
+            <span aria-hidden="true">🔗</span>
+        </button>
         <div class="left-copy">
             <div class="left-brand">
                 <img src="icons/Logo - Everest.png" alt="Everest logo">
@@ -608,6 +619,38 @@
                 <div class="feedback-message" id="feedbackMessage" aria-live="polite"></div>
             </section>
         </main>
+    </div>
+
+    <div class="project-qr-modal" id="projectQrModal" hidden aria-hidden="true">
+        <div class="project-qr-backdrop" data-qr-close="backdrop"></div>
+        <div class="project-qr-dialog" role="dialog" aria-modal="true" aria-labelledby="projectQrTitle">
+            <button type="button" class="project-qr-close" id="projectQrClose" aria-label="Close QR panel">×</button>
+            <div class="project-qr-eyebrow">Everest access portal</div>
+            <h3 id="projectQrTitle">Open Everest on any device</h3>
+            <p>Scan the project QR or use the live link below to reach the Everest login page.</p>
+            <div class="project-qr-frame">
+                <div class="project-qr-glow"></div>
+                <div class="project-qr-code-shell">
+                    <img
+                        id="projectQrImage"
+                        class="project-qr-image"
+                        alt="QR code for Everest login page"
+                        loading="lazy"
+                    >
+                    <div class="project-qr-badge">
+                        <img src="icons/Logo - Everest.png" alt="" aria-hidden="true">
+                    </div>
+                </div>
+            </div>
+            <a
+                class="project-qr-link"
+                href="https://astroversed.github.io/everest.start/"
+                target="_blank"
+                rel="noreferrer noopener"
+            >
+                https://astroversed.github.io/everest.start/
+            </a>
+        </div>
     </div>
 
     <script src="script.js"></script>

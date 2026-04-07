@@ -38,6 +38,11 @@ const colorPickerBody = document.getElementById('colorPickerBody');
 const emojiPickerBody = document.getElementById('emojiPickerBody');
 const colorPickerBlock = colorPickerToggle ? colorPickerToggle.closest('.picker-block') : null;
 const emojiPickerBlock = emojiPickerToggle ? emojiPickerToggle.closest('.picker-block') : null;
+const projectQrTrigger = document.getElementById('projectQrTrigger');
+const projectQrModal = document.getElementById('projectQrModal');
+const projectQrClose = document.getElementById('projectQrClose');
+const projectQrBackdrop = projectQrModal ? projectQrModal.querySelector('.project-qr-backdrop') : null;
+const projectQrImage = document.getElementById('projectQrImage');
 
 const customColorTrigger = document.getElementById('customColorTrigger');
 const customColorPanel = document.getElementById('customColorPanel');
@@ -84,6 +89,7 @@ let mobilePanelReturnTimer = null;
 let compactIdentityMobileMode = null;
 let customColorOutsideCloseLockUntil = 0;
 let sharedRegistry = null;
+const EVEREST_START_URL = 'https://astroversed.github.io/everest.start/';
 
 function readJsonStorage(key, fallback) {
     try {
@@ -742,6 +748,52 @@ function setupCompactIdentityDropdowns() {
     syncCompactIdentityDropdowns(true);
     window.addEventListener('resize', () => {
         syncCompactIdentityDropdowns();
+    });
+}
+
+function openProjectQrModal() {
+    if (!projectQrModal) return;
+
+    if (projectQrImage && !projectQrImage.getAttribute('src')) {
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=16&data=${encodeURIComponent(EVEREST_START_URL)}`;
+        projectQrImage.setAttribute('src', qrUrl);
+    }
+
+    projectQrModal.hidden = false;
+    projectQrModal.setAttribute('aria-hidden', 'false');
+    projectQrTrigger?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProjectQrModal() {
+    if (!projectQrModal) return;
+    projectQrModal.hidden = true;
+    projectQrModal.setAttribute('aria-hidden', 'true');
+    projectQrTrigger?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+}
+
+function setupProjectQrModal() {
+    if (!projectQrTrigger || !projectQrModal) return;
+
+    projectQrTrigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        openProjectQrModal();
+    });
+
+    projectQrClose?.addEventListener('click', (event) => {
+        event.preventDefault();
+        closeProjectQrModal();
+    });
+
+    projectQrBackdrop?.addEventListener('click', () => {
+        closeProjectQrModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && projectQrModal && !projectQrModal.hidden) {
+            closeProjectQrModal();
+        }
     });
 }
 
@@ -1592,6 +1644,7 @@ function initRegisterPage() {
     attachEmojiSelection();
     setupCustomColorPicker();
     setupCompactIdentityDropdowns();
+    setupProjectQrModal();
     setupScrollablePopAnimation('.color-options', '.color-swatch');
     setupScrollablePopAnimation('.emoji-options', '.emoji-choice');
     setupScrollablePopAnimation('.course-options', '.course-option');
