@@ -245,10 +245,15 @@ body {
     display: grid;
     place-items: center;
     padding: 24px;
+    opacity: 1;
 }
 
 .project-qr-modal[hidden] {
     display: none;
+}
+
+.project-qr-modal.is-closing {
+    pointer-events: none;
 }
 
 .project-qr-backdrop {
@@ -256,6 +261,11 @@ body {
     inset: 0;
     background: rgba(8, 11, 18, 0.42);
     backdrop-filter: blur(16px) saturate(1.1);
+    animation: qrBackdropIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-qr-modal.is-closing .project-qr-backdrop {
+    animation: qrBackdropOut 0.22s ease forwards;
 }
 
 .project-qr-dialog {
@@ -271,7 +281,11 @@ body {
         0 34px 80px rgba(13, 24, 52, 0.22),
         0 10px 32px rgba(75, 116, 240, 0.08);
     text-align: center;
-    animation: panelReveal 0.22s ease;
+    animation: qrDialogIn 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-qr-modal.is-closing .project-qr-dialog {
+    animation: qrDialogOut 0.22s ease forwards;
 }
 
 .project-qr-dialog::before {
@@ -304,13 +318,14 @@ body {
 
 .project-qr-eyebrow {
     display: inline-flex;
+    margin-bottom: 2px;
     padding: 8px 14px;
     border-radius: 999px;
-    background: rgba(102, 126, 234, 0.11);
-    color: #4f66b8;
-    font-size: 0.78rem;
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--color-primary);
+    font-size: 0.76rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
 }
 
@@ -1903,6 +1918,54 @@ body {
     60% { transform: translateX(-4px); }
     80% { transform: translateX(4px); }
     100% { transform: translateX(0); }
+}
+
+@keyframes qrBackdropIn {
+    0% {
+        opacity: 0;
+        backdrop-filter: blur(0px) saturate(1);
+    }
+    100% {
+        opacity: 1;
+        backdrop-filter: blur(16px) saturate(1.1);
+    }
+}
+
+@keyframes qrBackdropOut {
+    0% {
+        opacity: 1;
+        backdrop-filter: blur(16px) saturate(1.1);
+    }
+    100% {
+        opacity: 0;
+        backdrop-filter: blur(0px) saturate(1);
+    }
+}
+
+@keyframes qrDialogIn {
+    0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.94);
+    }
+    58% {
+        opacity: 1;
+        transform: translateY(-3px) scale(1.01);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes qrDialogOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+    }
 }
 
 @media (max-width: 1100px) {

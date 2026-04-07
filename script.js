@@ -90,6 +90,7 @@ let compactIdentityMobileMode = null;
 let customColorOutsideCloseLockUntil = 0;
 let sharedRegistry = null;
 const EVEREST_START_URL = 'https://astroversed.github.io/everest.start/';
+let projectQrCloseTimer = null;
 
 function readJsonStorage(key, fallback) {
     try {
@@ -754,12 +755,18 @@ function setupCompactIdentityDropdowns() {
 function openProjectQrModal() {
     if (!projectQrModal) return;
 
+    if (projectQrCloseTimer) {
+        window.clearTimeout(projectQrCloseTimer);
+        projectQrCloseTimer = null;
+    }
+
     if (projectQrImage && !projectQrImage.getAttribute('src')) {
         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=14&color=75-116-240&bgcolor=247-249-255&data=${encodeURIComponent(EVEREST_START_URL)}`;
         projectQrImage.setAttribute('src', qrUrl);
     }
 
     projectQrModal.hidden = false;
+    projectQrModal.classList.remove('is-closing');
     projectQrModal.setAttribute('aria-hidden', 'false');
     projectQrTrigger?.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
@@ -767,10 +774,22 @@ function openProjectQrModal() {
 
 function closeProjectQrModal() {
     if (!projectQrModal) return;
-    projectQrModal.hidden = true;
-    projectQrModal.setAttribute('aria-hidden', 'true');
+
+    if (projectQrCloseTimer) {
+        window.clearTimeout(projectQrCloseTimer);
+        projectQrCloseTimer = null;
+    }
+
+    projectQrModal.classList.add('is-closing');
     projectQrTrigger?.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
+
+    projectQrCloseTimer = window.setTimeout(() => {
+        projectQrModal.hidden = true;
+        projectQrModal.classList.remove('is-closing');
+        projectQrModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        projectQrCloseTimer = null;
+    }, 220);
 }
 
 function setupProjectQrModal() {
