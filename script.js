@@ -91,6 +91,7 @@ let customColorOutsideCloseLockUntil = 0;
 let sharedRegistry = null;
 const EVEREST_START_URL = 'https://astroversed.github.io/everest.start/';
 let projectQrCloseTimer = null;
+let projectQrCodeInstance = null;
 
 function readJsonStorage(key, fallback) {
     try {
@@ -752,6 +753,52 @@ function setupCompactIdentityDropdowns() {
     });
 }
 
+function renderProjectQrCode() {
+    if (!projectQrImage) return;
+
+    projectQrImage.classList.remove('is-fallback');
+    projectQrImage.replaceChildren();
+
+    if (typeof window.QRCodeStyling !== 'function') {
+        projectQrImage.classList.add('is-fallback');
+        return;
+    }
+
+    if (!projectQrCodeInstance) {
+        projectQrCodeInstance = new window.QRCodeStyling({
+            width: 256,
+            height: 256,
+            type: 'canvas',
+            data: EVEREST_START_URL,
+            margin: 10,
+            qrOptions: {
+                errorCorrectionLevel: 'Q'
+            },
+            dotsOptions: {
+                color: '#4b74f0',
+                type: 'rounded'
+            },
+            cornersSquareOptions: {
+                color: '#202862',
+                type: 'extra-rounded'
+            },
+            cornersDotOptions: {
+                color: '#7fd9f7',
+                type: 'dot'
+            },
+            backgroundOptions: {
+                color: '#f7f9ff'
+            }
+        });
+    } else {
+        projectQrCodeInstance.update({
+            data: EVEREST_START_URL
+        });
+    }
+
+    projectQrCodeInstance.append(projectQrImage);
+}
+
 function openProjectQrModal() {
     if (!projectQrModal) return;
 
@@ -760,10 +807,7 @@ function openProjectQrModal() {
         projectQrCloseTimer = null;
     }
 
-    if (projectQrImage && !projectQrImage.getAttribute('src')) {
-        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=14&color=75-116-240&bgcolor=247-249-255&data=${encodeURIComponent(EVEREST_START_URL)}`;
-        projectQrImage.setAttribute('src', qrUrl);
-    }
+    renderProjectQrCode();
 
     projectQrModal.hidden = false;
     projectQrModal.classList.remove('is-closing');

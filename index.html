@@ -638,12 +638,12 @@
             <div class="project-qr-frame">
                 <div class="project-qr-glow"></div>
                 <div class="project-qr-code-shell">
-                    <img
+                    <div
                         id="projectQrImage"
                         class="project-qr-image"
-                        alt="QR code for Everest login page"
-                        loading="lazy"
-                    >
+                        role="img"
+                        aria-label="QR code for Everest login page"
+                    ></div>
                     <div class="project-qr-badge">
                         <span class="project-qr-badge-icon" aria-hidden="true">
                             <span></span>
@@ -665,6 +665,7 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/qr-code-styling@1.9.2/lib/qr-code-styling.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
