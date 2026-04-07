@@ -433,14 +433,14 @@ body {
 
 .project-qr-core {
     position: relative;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     display: block;
 }
 
 .project-qr-core-ring {
     position: absolute;
-    inset: 1px;
+    inset: 0;
     border: 2.5px solid var(--color-primary);
     border-radius: 50%;
 }
@@ -449,12 +449,12 @@ body {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     transform: translateX(-50%);
     background: var(--color-primary);
     border-radius: 50%;
-    margin-top: -5px;
+    margin-top: -6px;
 }
 
 .project-qr-core-dot {
