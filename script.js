@@ -771,13 +771,6 @@ function renderProjectQrCode() {
             type: 'canvas',
             data: EVEREST_START_URL,
             margin: 12,
-            image: 'icons/Logo B - Everest.png',
-            imageOptions: {
-                hideBackgroundDots: true,
-                imageSize: 0.23,
-                margin: 6,
-                crossOrigin: 'anonymous'
-            },
             qrOptions: {
                 errorCorrectionLevel: 'Q'
             },
