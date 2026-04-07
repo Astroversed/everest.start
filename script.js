@@ -755,7 +755,7 @@ function openProjectQrModal() {
     if (!projectQrModal) return;
 
     if (projectQrImage && !projectQrImage.getAttribute('src')) {
-        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=16&data=${encodeURIComponent(EVEREST_START_URL)}`;
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=14&color=75-116-240&bgcolor=247-249-255&data=${encodeURIComponent(EVEREST_START_URL)}`;
         projectQrImage.setAttribute('src', qrUrl);
     }
 
