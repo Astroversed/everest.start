@@ -384,6 +384,10 @@ body {
     color: var(--text-title-color);
 }
 
+.project-qr-title-accent {
+    color: var(--color-primary);
+}
+
 .project-qr-dialog p {
     margin: 0;
     color: var(--text-muted);
@@ -489,7 +493,7 @@ body {
 .project-qr-core-ring {
     position: absolute;
     inset: 0;
-    border: 3px solid var(--color-primary);
+    border: 3.6px solid var(--color-primary);
     border-radius: 50%;
 }
 
