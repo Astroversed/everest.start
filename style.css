@@ -423,7 +423,7 @@ body {
     transform: translate(50%, 50%);
     width: 52px;
     height: 52px;
-    border-radius: 18px;
+    border-radius: 50%;
     background: #ffffff;
     display: grid;
     place-items: center;
@@ -433,39 +433,32 @@ body {
 
 .project-qr-core {
     position: relative;
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     display: block;
 }
 
 .project-qr-core-ring {
     position: absolute;
-    inset: 0;
-    border: 3px solid var(--color-primary);
+    inset: 1px;
+    border: 2.5px solid var(--color-primary);
     border-radius: 50%;
 }
 
 .project-qr-core-peak {
     position: absolute;
     left: 50%;
-    bottom: 4px;
-    width: 14px;
-    height: 11px;
+    top: 50%;
+    width: 10px;
+    height: 10px;
     transform: translateX(-50%);
     background: var(--color-primary);
-    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-    border-radius: 1px;
+    border-radius: 50%;
+    margin-top: -5px;
 }
 
 .project-qr-core-dot {
-    position: absolute;
-    top: 7px;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    background: var(--color-primary);
+    display: none;
 }
 
 .project-qr-link {
