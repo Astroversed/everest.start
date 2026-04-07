@@ -776,19 +776,10 @@ function renderProjectQrCode() {
             },
             dotsOptions: {
                 type: 'rounded',
-                gradient: {
-                    type: 'linear',
-                    rotation: Math.PI / 3,
-                    colorStops: [
-                        { offset: 0, color: '#1c2358' },
-                        { offset: 0.34, color: '#4b74f0' },
-                        { offset: 0.7, color: '#7fd9f7' },
-                        { offset: 1, color: '#d8f6ef' }
-                    ]
-                }
+                color: '#4b74f0'
             },
             cornersSquareOptions: {
-                color: '#1c2358',
+                color: '#4b74f0',
                 type: 'extra-rounded'
             },
             cornersDotOptions: {

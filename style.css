@@ -431,10 +431,41 @@ body {
     box-shadow: 0 12px 24px rgba(45, 88, 168, 0.14);
 }
 
-.project-qr-badge img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
+.project-qr-core {
+    position: relative;
+    width: 26px;
+    height: 26px;
+    display: block;
+}
+
+.project-qr-core-ring {
+    position: absolute;
+    inset: 0;
+    border: 3px solid var(--color-primary);
+    border-radius: 50%;
+}
+
+.project-qr-core-peak {
+    position: absolute;
+    left: 50%;
+    bottom: 4px;
+    width: 14px;
+    height: 11px;
+    transform: translateX(-50%);
+    background: var(--color-primary);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    border-radius: 1px;
+}
+
+.project-qr-core-dot {
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: var(--color-primary);
 }
 
 .project-qr-link {
