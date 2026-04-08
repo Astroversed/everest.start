@@ -1325,6 +1325,39 @@ function setupCustomColorDrag() {
 function setupCustomColorStudioDrag() {
     if (!customColorStudio || !customStudioDragIndicator) return;
 
+    const handleStudioDragMove = (event) => {
+        if (!customColorStudioDragState) return;
+        event.preventDefault();
+        event.stopPropagation();
+
+        const nextLeft = customColorStudioDragState.panelLeft + (event.clientX - customColorStudioDragState.startX);
+        const nextTop = customColorStudioDragState.panelTop + (event.clientY - customColorStudioDragState.startY);
+        const maxLeft = Math.max(12, window.innerWidth - customColorStudio.offsetWidth - 12);
+        const maxTop = Math.max(12, window.innerHeight - customColorStudio.offsetHeight - 12);
+
+        customColorStudio.style.left = `${Math.min(Math.max(12, nextLeft), maxLeft)}px`;
+        customColorStudio.style.top = `${Math.min(Math.max(12, nextTop), maxTop)}px`;
+    };
+
+    const finishDrag = (event) => {
+        if (!customColorStudioDragState) return;
+
+        customColorStudioDragState = null;
+        customColorStudio.classList.remove('dragging');
+        lockCustomColorOutsideClose(240);
+        window.removeEventListener('pointermove', handleStudioDragMove, true);
+        window.removeEventListener('pointerup', finishDrag, true);
+        window.removeEventListener('pointercancel', finishDrag, true);
+
+        if (event && typeof event.pointerId === 'number') {
+            try {
+                customStudioDragIndicator.releasePointerCapture(event.pointerId);
+            } catch (error) {
+                void error;
+            }
+        }
+    };
+
     customStudioDragIndicator.addEventListener('pointerdown', (event) => {
         if (event.target instanceof Element && event.target.closest('button, input, textarea, select, a')) return;
         if (event.pointerType === 'mouse' && event.button !== 0) return;
@@ -1341,40 +1374,10 @@ function setupCustomColorStudioDrag() {
 
         customColorStudio.classList.add('dragging');
         customStudioDragIndicator.setPointerCapture(event.pointerId);
+        window.addEventListener('pointermove', handleStudioDragMove, true);
+        window.addEventListener('pointerup', finishDrag, true);
+        window.addEventListener('pointercancel', finishDrag, true);
     });
-
-    customStudioDragIndicator.addEventListener('pointermove', (event) => {
-        if (!customColorStudioDragState) return;
-        event.preventDefault();
-        event.stopPropagation();
-
-        const nextLeft = customColorStudioDragState.panelLeft + (event.clientX - customColorStudioDragState.startX);
-        const nextTop = customColorStudioDragState.panelTop + (event.clientY - customColorStudioDragState.startY);
-        const maxLeft = Math.max(12, window.innerWidth - customColorStudio.offsetWidth - 12);
-        const maxTop = Math.max(12, window.innerHeight - customColorStudio.offsetHeight - 12);
-
-        customColorStudio.style.left = `${Math.min(Math.max(12, nextLeft), maxLeft)}px`;
-        customColorStudio.style.top = `${Math.min(Math.max(12, nextTop), maxTop)}px`;
-    });
-
-    const finishDrag = (event) => {
-        if (!customColorStudioDragState) return;
-
-        customColorStudioDragState = null;
-        customColorStudio.classList.remove('dragging');
-        lockCustomColorOutsideClose(240);
-
-        if (event && typeof event.pointerId === 'number') {
-            try {
-                customStudioDragIndicator.releasePointerCapture(event.pointerId);
-            } catch (error) {
-                void error;
-            }
-        }
-    };
-
-    customStudioDragIndicator.addEventListener('pointerup', finishDrag);
-    customStudioDragIndicator.addEventListener('pointercancel', finishDrag);
 }
 
 function attachColorSelection() {
